@@ -1,0 +1,19 @@
+/* My first CSS */
+p {
+ color:rgb(74, 91, 95);   
+}
+
+.heading {
+    color: rgb(139, 137, 117) 
+}
+
+img {
+     width: 700px; height: 500px;
+     border-width: 5px;
+     border-style: solid;
+     border-color: beige;
+}
+
+body {
+    background-color: rgb(50,50,50);
+}
