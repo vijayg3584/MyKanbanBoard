@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class DashboardController {
 
+	// @RequestMapping(value = "/dashboard")
+	// public String showDashboard(@ModelAttribute )
+
 	@RequestMapping(value = "/profile")
-	public String showProfile(@ModelAttribute ("profile") UserProfile userProfile)
-	{
+	public String showProfile(@ModelAttribute("profile") UserProfile userProfile) {
 		System.out.println("First Name: " + userProfile.getFirstName());
 		return "profile";
 	}

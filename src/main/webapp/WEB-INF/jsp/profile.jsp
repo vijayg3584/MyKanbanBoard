@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>Modify profile</h1>
-	<form:form commandName="profile" action="login.html">
+	<form:form commandName="profile" action="login">
 		<table>
 			<tr>
 				<td>First Name:</td>
