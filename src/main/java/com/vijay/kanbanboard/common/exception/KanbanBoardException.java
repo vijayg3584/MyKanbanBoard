@@ -7,10 +7,6 @@ public class KanbanBoardException extends RuntimeException {
 
 	private ErrorMessage errorMessage;
 
-	public KanbanBoardException() {
-		super();
-	}
-
 	public KanbanBoardException(ErrorMessage errMsg) {
 		this.setErrorMessage(errMsg);
 	}

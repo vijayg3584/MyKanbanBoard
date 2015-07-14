@@ -1,5 +1,6 @@
 package com.vijay.kanbanboard.login;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,17 +13,21 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.vijay.kanbanboard.common.exception.KanbanBoardException;
 import com.vijay.kanbanboard.common.model.ErrorMessage;
 import com.vijay.kanbanboard.common.model.User;
-import com.vijay.kanbanboard.common.model.UserDetails;
+import com.vijay.kanbanboard.common.model.UserDetail;
+import com.vijay.kanbanboard.common.service.UserService;
 
 @Controller
 @SessionAttributes("userDetails")
 public class LoginController {
 
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody UserDetails login(@RequestBody User user) {
+	public @ResponseBody UserDetail login(@RequestBody User user, UserDetail userDetails) {
 
 		if ("user".equals(user.getUsername()) && "pass".equals(user.getPassword())) {
-			UserDetails userDetails = new UserDetails();
+			// UserDetail userDetails = new UserDetail();
 			userDetails.setFirstName("UserFirstName");
 			userDetails.setLastName("userLastName");
 			return userDetails;
@@ -33,6 +38,11 @@ public class LoginController {
 			errorMessage.setDescription("Invalid username/password entered");
 			throw new KanbanBoardException(errorMessage);
 		}
+	}
+
+	@RequestMapping(value = "/newuser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody UserDetail newUserCreation(@RequestBody NewUser newUser) {
+		return userService.saveNewUser(newUser);
 	}
 
 	@ExceptionHandler(KanbanBoardException.class)

@@ -1,19 +1,31 @@
 package com.vijay.kanbanboard.common.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User {
 
-	private int id;
+	@Id
+	@GeneratedValue
+	@Column(name = "user_id")
+	private Long userId;
 
+	@Column(unique = true)
 	private String username;
 
 	private String password;
 
-	public int getId() {
-		return id;
+	public Long getId() {
+		return userId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {

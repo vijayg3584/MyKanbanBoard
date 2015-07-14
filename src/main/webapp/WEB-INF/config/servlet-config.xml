@@ -5,7 +5,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 	<mvc:annotation-driven />
-	<context:component-scan base-package="com.vijay.kanbanboard" />
+	<context:component-scan base-package="com.vijay.kanbanboard.login" />
 	<context:property-placeholder location="app.properties" />
 	<mvc:resources mapping="/**" location="/styles, /images" />
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" p:order="1">
