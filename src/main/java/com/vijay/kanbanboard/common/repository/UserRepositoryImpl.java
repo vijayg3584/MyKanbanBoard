@@ -5,8 +5,8 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import com.vijay.kanbanboard.common.model.Person;
 import com.vijay.kanbanboard.common.model.User;
-import com.vijay.kanbanboard.common.model.UserDetail;
 
 @Repository("userRepository")
 public class UserRepositoryImpl implements UserRepository {
@@ -21,9 +21,13 @@ public class UserRepositoryImpl implements UserRepository {
 
 	}
 
-	public UserDetail saveUserDetail(UserDetail userDetail) {
-		entityManager.persist(userDetail);
+	public Person savePerson(Person person) {
+		entityManager.persist(person);
 		entityManager.flush();
-		return userDetail;
+		return person;
+	}
+
+	public Person readUser(User user) {
+		return entityManager.find(User.class, user.getId()).getPerson();
 	}
 }

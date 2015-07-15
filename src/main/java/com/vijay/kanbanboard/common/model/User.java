@@ -1,9 +1,12 @@
 package com.vijay.kanbanboard.common.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -12,20 +15,30 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "user_id")
-	private Long userId;
+	private Long id;
 
 	@Column(unique = true)
 	private String username;
 
 	private String password;
 
-	public Long getId() {
-		return userId;
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+	private Person person;
+
+	public Person getPerson() {
+		return person;
 	}
 
-	public void setId(Long userId) {
-		this.userId = userId;
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {

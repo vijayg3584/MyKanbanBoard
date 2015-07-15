@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vijay.kanbanboard.common.exception.KanbanBoardException;
 import com.vijay.kanbanboard.common.model.ErrorMessage;
+import com.vijay.kanbanboard.common.model.Person;
 import com.vijay.kanbanboard.common.model.User;
-import com.vijay.kanbanboard.common.model.UserDetail;
 import com.vijay.kanbanboard.common.service.UserService;
 
 @Controller
@@ -24,7 +24,7 @@ public class LoginController {
 	private UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody UserDetail login(@RequestBody User user, UserDetail userDetails) {
+	public @ResponseBody Person login(@RequestBody User user, Person userDetails) {
 
 		if ("user".equals(user.getUsername()) && "pass".equals(user.getPassword())) {
 			// UserDetail userDetails = new UserDetail();
@@ -40,14 +40,27 @@ public class LoginController {
 		}
 	}
 
+	@RequestMapping(value = "/readuser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody NewUserDTO readUser(@RequestBody NewUserDTO userReq) {
+
+		User user = new User();
+		user.setId(Long.valueOf(userReq.getUserId()));
+		Person person = userService.readUser(user);
+		// userReq.setUsername(user.getUsername());
+		// userReq.setPassword(user.getPassword());
+		userReq.setFirstName(person.getFirstName());
+		userReq.setLastName(person.getLastName());
+		userReq.setEmailId(person.getEmailId());
+		return userReq;
+	}
+
 	@RequestMapping(value = "/newuser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody UserDetail newUserCreation(@RequestBody NewUser newUser) {
+	public @ResponseBody Person newUserCreation(@RequestBody NewUserDTO newUser) {
 		return userService.saveNewUser(newUser);
 	}
 
 	@ExceptionHandler(KanbanBoardException.class)
 	public @ResponseBody ErrorMessage handleUserErrors(KanbanBoardException ex) {
-
 		return ex.getErrorMessage();
 	}
 }

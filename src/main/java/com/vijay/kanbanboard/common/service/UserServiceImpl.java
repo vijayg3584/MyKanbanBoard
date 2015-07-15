@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vijay.kanbanboard.common.model.Person;
 import com.vijay.kanbanboard.common.model.User;
-import com.vijay.kanbanboard.common.model.UserDetail;
 import com.vijay.kanbanboard.common.repository.UserRepository;
-import com.vijay.kanbanboard.login.NewUser;
+import com.vijay.kanbanboard.login.NewUserDTO;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -16,12 +16,12 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Transactional
-	public UserDetail authenticate(User user) {
+	public Person authenticate(User user) {
 		return null;
 	}
 
 	@Transactional
-	public UserDetail saveNewUser(NewUser newUser) {
+	public Person saveNewUser(NewUserDTO newUser) {
 		User user = new User();
 		user.setPassword(newUser.getPassword());
 		user.setUsername(newUser.getUsername());
@@ -29,16 +29,23 @@ public class UserServiceImpl implements UserService {
 		System.out.println("LoginController.newUserCreation() Username: " + user.getUsername());
 		System.out.println("LoginController.newUserCreation() Password: " + user.getPassword());
 		System.out.println("UserServiceImpl.saveNewUser() userId: " + userId);
-		UserDetail userDetail = new UserDetail();
-		userDetail.setUserId(userId);
-		userDetail.setFirstName(newUser.getFirstName());
-		userDetail.setLastName(newUser.getLastName());
+		Person person = new Person();
+		person.setFirstName(newUser.getFirstName());
+		person.setLastName(newUser.getLastName());
+		person.setEmailId(newUser.getEmailId());
+		person.setUser(user);
 
-		System.out.println("LoginController.newUserCreation() FirstName: " + userDetail.getFirstName());
-		System.out.println("LoginController.newUserCreation() LastName(): " + userDetail.getLastName());
+		System.out.println("LoginController.newUserCreation() FirstName: " + person.getFirstName());
+		System.out.println("LoginController.newUserCreation() LastName: " + person.getLastName());
+		System.out.println("LoginController.newUserCreation() Email Id: " + person.getEmailId());
 
-		UserDetail detail = userRepository.saveUserDetail(userDetail);
+		Person detail = userRepository.savePerson(person);
 
 		return detail;
+	}
+
+	public Person readUser(User user) {
+
+		return userRepository.readUser(user);
 	}
 }

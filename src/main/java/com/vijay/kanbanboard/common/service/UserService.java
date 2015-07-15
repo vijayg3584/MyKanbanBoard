@@ -1,13 +1,15 @@
 package com.vijay.kanbanboard.common.service;
 
+import com.vijay.kanbanboard.common.model.Person;
 import com.vijay.kanbanboard.common.model.User;
-import com.vijay.kanbanboard.common.model.UserDetail;
-import com.vijay.kanbanboard.login.NewUser;
+import com.vijay.kanbanboard.login.NewUserDTO;
 
 public interface UserService {
 
-	UserDetail authenticate(User user);
+	Person authenticate(User user);
 
-	UserDetail saveNewUser(NewUser newUser);
+	Person saveNewUser(NewUserDTO newUser);
+
+	Person readUser(User user);
 
 }

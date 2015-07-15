@@ -2,21 +2,20 @@ package com.vijay.kanbanboard.common.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_details")
-public class UserDetail {
+@Table(name = "people")
+public class Person {
 
 	@Id
-	@Column(name = "user_id")
-	private Long userId;
-
-	// @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	// private User user;
-	// // @JoinColumn(name = "user_Id", insertable = true, updatable = true,
-	// // nullable = false, unique = true)
+	@GeneratedValue
+	@Column(name = "id")
+	private Long id;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -24,15 +23,18 @@ public class UserDetail {
 	@Column(name = "last_name")
 	private String LastName;
 
-	@Column(name = "email_id")
+	@Column(name = "email_id", unique = true, nullable = false)
 	private String emailId;
 
-	public Long getUserId() {
-		return userId;
+	@OneToOne(fetch = FetchType.EAGER)
+	private User user;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getEmailId() {
@@ -57,6 +59,14 @@ public class UserDetail {
 
 	public void setLastName(String lastName) {
 		LastName = lastName;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
