@@ -23,6 +23,16 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
+	@RequestMapping(value = "/newuser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody NewUserDTO newUserCreation(@RequestBody NewUserDTO newUser) {
+		
+		System.out.println("LoginController.newUserCreation() "+newUser.getFirstName());
+		System.out.println("LoginController.newUserCreation() "+newUser.getLastName());
+		newUser.setUserId("1");
+		return newUser;
+//		return userService.saveNewUser(newUser);
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Person login(@RequestBody User user, Person userDetails) {
 
@@ -54,10 +64,6 @@ public class LoginController {
 		return userReq;
 	}
 
-	@RequestMapping(value = "/newuser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Person newUserCreation(@RequestBody NewUserDTO newUser) {
-		return userService.saveNewUser(newUser);
-	}
 
 	@ExceptionHandler(KanbanBoardException.class)
 	public @ResponseBody ErrorMessage handleUserErrors(KanbanBoardException ex) {
