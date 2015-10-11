@@ -8,8 +8,8 @@ public interface UserService {
 
 	Person authenticate(User user);
 
-	Person saveNewUser(NewUserDTO newUser);
+	NewUserDTO saveNewUser(NewUserDTO newUser);
 
-	Person readUser(User user);
+//	Person readUser(User user);
 
 }

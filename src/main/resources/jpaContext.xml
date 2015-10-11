@@ -4,9 +4,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
 	<context:annotation-config />
-	<context:component-scan base-package="com.vijay.kanbanboard" />
+
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<context:component-scan base-package="com.vijay.kanbanboard" />
+	
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="punit" />
 		<property name="dataSource" ref="dataSource" />
@@ -27,10 +31,11 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
+	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/kanban_board?autoReconnect=true" />
-		<property name="username" value="kanban_user" />
-		<property name="password" value="kanban_user" />
+		<property name="url" value="jdbc:mysql://54.255.132.254:3306/kanbanboard?autoReconnect=true" />
+		<property name="username" value="kanbanuser" />
+		<property name="password" value="kanbanuser" />
 	</bean>
 </beans>

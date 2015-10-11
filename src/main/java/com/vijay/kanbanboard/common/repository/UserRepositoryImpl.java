@@ -27,7 +27,7 @@ public class UserRepositoryImpl implements UserRepository {
 		return person;
 	}
 
-	public Person readUser(User user) {
-		return entityManager.find(User.class, user.getId()).getPerson();
-	}
+//	public Person readUser(User user) {
+//		return entityManager.find(User.class, user.getId()).getPerson();
+//	}
 }

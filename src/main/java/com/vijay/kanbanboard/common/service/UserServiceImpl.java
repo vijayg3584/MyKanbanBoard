@@ -21,11 +21,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Transactional
-	public Person saveNewUser(NewUserDTO newUser) {
+	public NewUserDTO saveNewUser(NewUserDTO newUser) {
 		User user = new User();
 		user.setPassword(newUser.getPassword());
 		user.setUsername(newUser.getUsername());
+		user.setFirstName(newUser.getFirstName());
+		user.setLastName(newUser.getLastName());
+		user.setEmailId(newUser.getEmailId());
+		
 		long userId = userRepository.saveUser(user);
+		
+		newUser.setUserId(String.valueOf(userId));
+		
+		return newUser;
+		
+		/*
 		System.out.println("LoginController.newUserCreation() Username: " + user.getUsername());
 		System.out.println("LoginController.newUserCreation() Password: " + user.getPassword());
 		System.out.println("UserServiceImpl.saveNewUser() userId: " + userId);
@@ -41,11 +51,11 @@ public class UserServiceImpl implements UserService {
 
 		Person detail = userRepository.savePerson(person);
 
-		return detail;
+		return detail;*/
 	}
 
-	public Person readUser(User user) {
-
-		return userRepository.readUser(user);
-	}
+//	public Person readUser(User user) {
+//
+//		return userRepository.readUser(user);
+//	}
 }

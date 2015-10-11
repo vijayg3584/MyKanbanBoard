@@ -19,7 +19,7 @@ import com.vijay.kanbanboard.common.service.UserService;
 @Controller
 @SessionAttributes("userDetails")
 public class LoginController {
-
+	
 	@Autowired
 	private UserService userService;
 
@@ -28,9 +28,10 @@ public class LoginController {
 		
 		System.out.println("LoginController.newUserCreation() "+newUser.getFirstName());
 		System.out.println("LoginController.newUserCreation() "+newUser.getLastName());
-		newUser.setUserId("1");
-		return newUser;
-//		return userService.saveNewUser(newUser);
+		
+//		newUser.setUserId(""+(i++));
+//		return newUser;
+		return userService.saveNewUser(newUser);
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -50,19 +51,19 @@ public class LoginController {
 		}
 	}
 
-	@RequestMapping(value = "/readuser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody NewUserDTO readUser(@RequestBody NewUserDTO userReq) {
-
-		User user = new User();
-		user.setId(Long.valueOf(userReq.getUserId()));
-		Person person = userService.readUser(user);
-		// userReq.setUsername(user.getUsername());
-		// userReq.setPassword(user.getPassword());
-		userReq.setFirstName(person.getFirstName());
-		userReq.setLastName(person.getLastName());
-		userReq.setEmailId(person.getEmailId());
-		return userReq;
-	}
+//	@RequestMapping(value = "/readuser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+//	public @ResponseBody NewUserDTO readUser(@RequestBody NewUserDTO userReq) {
+//
+//		User user = new User();
+//		user.setId(Long.valueOf(userReq.getUserId()));
+//		Person person = userService.readUser(user);
+//		// userReq.setUsername(user.getUsername());
+//		// userReq.setPassword(user.getPassword());
+//		userReq.setFirstName(person.getFirstName());
+//		userReq.setLastName(person.getLastName());
+//		userReq.setEmailId(person.getEmailId());
+//		return userReq;
+//	}
 
 
 	@ExceptionHandler(KanbanBoardException.class)

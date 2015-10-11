@@ -14,19 +14,21 @@
 			<param-value>/WEB-INF/config/servlet-config.xml</param-value>
 		</init-param>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>kanbanBoardServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
+<!-- Below config is for JPA -->
+
 	<context-param>
-	<param-name>contextConfigLocation</param-name>
-	<param-value>classpath:/jpaContext.xml</param-value>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/jpaContext.xml</param-value>
 	</context-param>
-	
+
 	<listener>
-	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
 </web-app>

@@ -9,6 +9,6 @@ public interface UserRepository {
 
 	Person savePerson(Person person);
 
-	Person readUser(User user);
+//	Person readUser(User user);
 
 }
